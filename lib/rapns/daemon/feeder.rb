@@ -7,7 +7,12 @@ module Rapns
         @stop = false
 
         if Rapns.config.embedded
-          Thread.new { feed_forever }
+          begin
+            Thread.new { feed_forever }
+          rescue Exception => e
+            Rails.logger.info("[RAPNS] Cannot start thread for Feeder")
+            Rails.logger.warn(e.message)
+          end
         elsif Rapns.config.push
           enqueue_notifications
         else

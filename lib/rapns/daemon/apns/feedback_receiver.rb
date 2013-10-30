@@ -20,12 +20,17 @@ module Rapns
         end
 
         def start
-          @thread = Thread.new do
-            loop do
-              break if @stop
-              check_for_feedback
-              interruptible_sleep.sleep @poll
+          begin
+            @thread = Thread.new do
+              loop do
+                break if @stop
+                check_for_feedback
+                interruptible_sleep.sleep @poll
+              end
             end
+          rescue Exception => e
+            Rails.logger.info("[RAPNS] Cannot start thread for FeedbackReceiver; App: #{@app.name}")
+            Rails.logger.warn(e.message)
           end
         end
 

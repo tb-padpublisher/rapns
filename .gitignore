@@ -10,3 +10,5 @@ spec/acceptance/fixtures
 gcm_test/bin
 .DS_Store
 spec/tmp/*.sqlite3
+.idea
+

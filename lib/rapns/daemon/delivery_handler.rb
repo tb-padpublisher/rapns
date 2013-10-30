@@ -8,11 +8,16 @@ module Rapns
       attr_accessor :queue
 
       def start
-        @thread = Thread.new do
-          loop do
-            handle_next_notification
-            break if @stop
+        begin
+          @thread = Thread.new do
+            loop do
+              handle_next_notification
+              break if @stop
+            end
           end
+        rescue Exception => e
+          Rails.logger.info("[RAPNS] Cannot start thread for notification handling")
+          Rails.logger.warn(e.message)
         end
       end
 
