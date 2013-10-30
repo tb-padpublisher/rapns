@@ -8,8 +8,14 @@ module Rapns
         def after_start
           unless Rapns.config.push
             poll = Rapns.config.feedback_poll
-            @feedback_receiver = FeedbackReceiver.new(app, poll)
-            @feedback_receiver.start
+            
+            begin
+              @feedback_receiver = FeedbackReceiver.new(app, poll)
+              @feedback_receiver.start
+            rescue Exception => e
+                Rails.logger.info("[RAPNS] Cannot start Feedback service for app #{app.name}")
+                Rails.logger.warn(e.message)
+            end
           end
         end
 
