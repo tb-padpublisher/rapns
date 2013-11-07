@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
+ruby '2.0.0'
 
 gem 'rake'
-gem 'rspec', '>= 2.4'
-gem 'rails', '~> 3.2'
+gem 'rspec'
+gem 'rails', '4.0.0'
 gem 'database_cleaner', '1.0.1'
 gem 'simplecov'
 gem 'timecop', '0.5.9.2'
