@@ -6,6 +6,8 @@ gem 'rails', '~> 3.2'
 gem 'database_cleaner', '1.0.1'
 gem 'simplecov'
 gem 'timecop', '0.5.9.2'
+# To be able to use protected attributes with Rails 4
+gem 'protected_attributes'
 
 platform :mri_19, :mri_20 do
   gem 'cane'
